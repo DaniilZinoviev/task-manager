@@ -19,20 +19,20 @@ function AddColumn({ addColumn }) {
       {view === "full" ? (
         <div className="column">
           <h3>Add column</h3>
-          <p>
+          <div className="mb-20">
             <form onSubmit={(e) => onSubmit(e)}>
               <input
                 type="text"
                 value={label}
                 onChange={(e) => setLabel(e.target.value)}
                 placeholder="Column name"
-                autoFocus="true"
+                autoFocus={true}
               />
               <button type="submit" className="btn">
                 Add a new column
               </button>
             </form>
-          </p>
+          </div>
         </div>
       ) : (
         <div>

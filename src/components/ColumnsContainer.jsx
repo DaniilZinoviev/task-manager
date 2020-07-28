@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Column from "./Column";
 import AddColumn from "./AddColumn";
 
 function ColumnsContainer({ columns, addColumn }) {
-  
+  const [isDragged, setIsDragged] = useState(false);
+
   return (
     <div className="columns-container">
       {columns.map((column, index) => (

@@ -35,6 +35,9 @@ body {
   max-width: 1140px;
 
 }
+.mb-20 {
+  margin-bottom: 20px;
+}
 
 .columns-container {
   display: flex;
