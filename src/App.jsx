@@ -38,22 +38,24 @@ function App() {
   ]);
 
   function addColumn(label) {
-    setColumns(columns.concat([{
-      id: Math.floor(Math.random() * 300),
-      label: label,
-      cards: []
-    }]));
+    setColumns(
+      columns.concat([
+        {
+          id: Math.floor(Math.random() * 300),
+          label: label,
+          cards: [],
+        },
+      ])
+    );
   }
 
   return (
     <React.Fragment>
-
       <header className="container text-center ">
         <h1>Boards App</h1>
       </header>
 
-      <ColumnsContainer columns={columns} addColumn={addColumn}/>
-
+      <ColumnsContainer columns={columns} addColumn={addColumn} />
     </React.Fragment>
   );
 }

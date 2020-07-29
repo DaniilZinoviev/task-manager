@@ -8,7 +8,6 @@ function AddColumn({ addColumn }) {
   function onSubmit(e) {
     e.preventDefault();
     if (label.trim) {
-      console.log("added ");
       addColumn(label);
       setLabel("");
       setView("minimal");

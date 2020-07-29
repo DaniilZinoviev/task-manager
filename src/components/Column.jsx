@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 
 function Column({ column, index }) {
   const columnRef = React.createRef();
+
+  const [hover, setHover] = useState(false)
 
   function onDrop(e) {
     console.log("onDrop", e);
@@ -16,16 +18,19 @@ function Column({ column, index }) {
     // e.preventDefault();
     if (e.target === columnRef.current) {
       console.log("onDragEnter", columnRef.current === e.target, e.target);
+      setHover(true);
     }
   }
-
 
   function onDragLeave(e) {
     // e.preventDefault();
     if (e.target === columnRef.current) {
       console.log("onDragLeave", columnRef.current === e.target, e.target);
+      setHover(false);
     }
   }
+
+  
   return (
     <div
       className="column column-default"
@@ -34,15 +39,17 @@ function Column({ column, index }) {
       onDragOver={(e) => onDragOver(e)}
       onDragEnter={(e) => onDragEnter(e)}
       onDragLeave={(e) => onDragLeave(e)}
-    >
-      <h3>{column.label}</h3>
-      <div className="columns">
-        {column.cards.map((card) => (
-          <Card card={card} key={card.id} />
-        ))}
 
+    >
+        <h3>{column.label}</h3>
+        <div className="columns">
+          {column.cards.map((card) => (
+            <Card card={card} key={card.id} />
+          ))}
+
+          {hover ? <div className="card">test</div> : null}
+        </div>
       </div>
-    </div>
   );
 }
 
