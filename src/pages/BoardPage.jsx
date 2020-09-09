@@ -16,9 +16,7 @@ const BoardPage = ({ board, columns, tasks }) => {
       </header>
 
       <div className="container mb-5">
-        <h2>
-          Board: <b className="">{board.title}</b>
-        </h2>
+        <h2>{board.title}</h2>
       </div>
 
       <main>
