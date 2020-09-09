@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-function AddColumn({ addColumn }) {
+const AddColumn = ({ addColumn }) => {
   const [label, setLabel] = useState("");
   const [view, setView] = useState("minimal"); // minimal || full
 
-  function onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
     if (label.trim) {
       addColumn(label);
       setLabel("");
       setView("minimal");
     }
-  }
+  };
+
   return (
     <React.Fragment>
       {view === "full" ? (
@@ -42,7 +43,7 @@ function AddColumn({ addColumn }) {
       )}
     </React.Fragment>
   );
-}
+};
 
 AddColumn.propTypes = {
   addColumn: PropTypes.func.isRequired,

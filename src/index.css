@@ -103,3 +103,7 @@ input {
   box-shadow: 1px 5px 5px 0 rgba(22, 22, 22, 0.4);
   margin-bottom: 0.5em;
 }
+
+.drag-hovered * {
+  pointer-events: none;
+}
