@@ -5,10 +5,14 @@ import { Board } from "../Board";
 
 const BoardsList = ({ boardsOrder, boards }) => {
   return (
-    <div className="boards-list">
+    <div className="boards-list d-flex flex-wrap">
       {boardsOrder.map((boardId, index) => {
         const board = boards[boardId];
-        return <Board board={board} key={board.id} />;
+        return (
+          <div className="mx-2 mb-2">
+            <Board board={board} key={board.id} />
+          </div>
+        );
       })}
     </div>
   );

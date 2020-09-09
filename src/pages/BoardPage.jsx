@@ -6,15 +6,20 @@ const BoardPage = ({ board, columns, tasks }) => {
   // @todo: get board from router
   return (
     <div className="board-page">
-      <header className="container">
-        <h1 className="text-center">Board page</h1>
-        <h3>
-          Board: <i>{board.title}</i>
-        </h3>
-        <p>
-          <Link to="/">Back</Link>
-        </p>
+      <header className="z-depth-1 mb-3 pt-2 pb-1">
+        <div className="container d-flex align-items-center">
+          <Link to="/" className="h3 mr-4">
+            <i className="fas fa-arrow-left"></i>
+          </Link>
+          <h1>Board page</h1>
+        </div>
       </header>
+
+      <div className="container mb-5">
+        <h2>
+          Board: <b className="">{board.title}</b>
+        </h2>
+      </div>
 
       <main>
         <ColumnsList board={board} columns={columns} tasks={tasks} />
