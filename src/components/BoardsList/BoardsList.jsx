@@ -1,7 +1,9 @@
 import React from "react";
-import Board from "./Board";
 
-const BoardsList = ({ boards, boardsOrder }) => {
+import "./BoardsList.scss";
+import { Board } from "../Board";
+
+const BoardsList = ({ boardsOrder, boards }) => {
   return (
     <div className="boards-list">
       {boardsOrder.map((boardId, index) => {

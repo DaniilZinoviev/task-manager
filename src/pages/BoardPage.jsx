@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ColumnsList } from "../components/ColumnsList";
 
 const BoardPage = ({ board, columns, tasks }) => {
   // @todo: get board from router
@@ -14,6 +15,10 @@ const BoardPage = ({ board, columns, tasks }) => {
           <Link to="/">Back</Link>
         </p>
       </header>
+
+      <main>
+        <ColumnsList board={board} columns={columns} tasks={tasks} />
+      </main>
     </div>
   );
 };

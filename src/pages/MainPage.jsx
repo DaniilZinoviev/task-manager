@@ -1,5 +1,6 @@
 import React from "react";
-import BoardsList from "../components/boards/BoardsList";
+
+import { BoardsList } from "../components/BoardsList";
 
 const MainPage = ({ boards, boardsOrder }) => {
   return (
@@ -9,7 +10,7 @@ const MainPage = ({ boards, boardsOrder }) => {
       </header>
 
       <main className="container">
-        <BoardsList boards={boards} boardsOrder={boardsOrder} />
+        <BoardsList boardsOrder={boardsOrder} boards={boards} />
       </main>
     </div>
   );

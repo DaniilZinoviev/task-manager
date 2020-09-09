@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import ColumnsContainer from "./components/ColumnsContainer";
-import { appData } from "./sample-data";
-import MainPage from "./pages/MainPage";
-import BoardPage from "./pages/BoardPage";
+import "./App.scss";
+import { appData } from "../../sample-data";
+import MainPage from "../../pages/MainPage";
+import BoardPage from "../../pages/BoardPage";
 
 class App extends React.Component {
   // const addColumn = (label) => {

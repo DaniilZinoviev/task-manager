@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
+import './AddColumn.scss';
+
 const AddColumn = ({ addColumn }) => {
   const [label, setLabel] = useState("");
   const [view, setView] = useState("minimal"); // minimal || full
