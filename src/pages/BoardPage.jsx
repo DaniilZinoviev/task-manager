@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ColumnsList } from "../components/ColumnsList";
+import { DragDropContext } from "react-beautiful-dnd";
 
 const BoardPage = ({ board, columns, tasks }) => {
+  const dragend = (...props) => {
+    console.log("dragend", props);
+  };
+
   // @todo: get board from router
   return (
     <div className="board-page">
@@ -20,7 +25,9 @@ const BoardPage = ({ board, columns, tasks }) => {
       </div>
 
       <main>
-        <ColumnsList board={board} columns={columns} tasks={tasks} />
+        <DragDropContext onDragEnd={dragend}>
+          <ColumnsList board={board} columns={columns} tasks={tasks} />
+        </DragDropContext>
       </main>
     </div>
   );
