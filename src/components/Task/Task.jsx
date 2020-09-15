@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
+
 import "./Task.scss";
 
 const Task = ({ item, index }) => {
+  const { id, title } = item;
+
   return (
-    <Draggable draggableId={item.id} index={index}>
+    <Draggable draggableId={id} index={index}>
       {(provided) => (
         <div
           className="task card px-2 py-1 mb-2"
@@ -13,7 +16,7 @@ const Task = ({ item, index }) => {
           {...provided.dragHandleProps}
           ref={provided.innerRef}
         >
-          {item.title}
+          {title}
         </div>
       )}
     </Draggable>

@@ -2,7 +2,7 @@ import React from "react";
 
 import { BoardsList } from "../components/BoardsList";
 
-const MainPage = ({ boards, boardsOrder }) => {
+const MainPage = () => {
   return (
     <div className="main-page">
       <header className="z-depth-1 mb-3 pt-2 pb-1">
@@ -12,7 +12,7 @@ const MainPage = ({ boards, boardsOrder }) => {
       </header>
 
       <main className="container">
-        <BoardsList boardsOrder={boardsOrder} boards={boards} />
+        <BoardsList />
       </main>
     </div>
   );

@@ -1,24 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Task } from "../Task";
 import { Droppable } from "react-beautiful-dnd";
+import { connect } from "react-redux";
 
 import "./Column.scss";
+import { Task } from "../Task";
 
-const Column = ({ column, tasks }) => {
+const Column = ({ columnId, tasks, columns }) => {
+  const column = columns[columnId];
+  const { id, title, taskIds } = column;
+
   return (
     <div className="column card mx-3">
       <div className="card-body">
-        <h4 className="card-title mb-4">{column.title}</h4>
+        <h4 className="card-title mb-4">{title}</h4>
 
-        <Droppable droppableId={column.id}>
+        <Droppable droppableId={id}>
           {(provided) => (
             <div
               className="columns card-text"
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {column.taskIds.map((taskId, index) => {
+              {taskIds.map((taskId, index) => {
                 const task = tasks[taskId];
                 return <Task key={taskId} item={task} index={index} />;
               })}
@@ -33,7 +37,14 @@ const Column = ({ column, tasks }) => {
 
 Column.propTypes = {
   index: PropTypes.number,
-  column: PropTypes.object.isRequired,
+  columnId: PropTypes.string.isRequired,
 };
 
-export default Column;
+const mapStateToProps = ({ tasks, columns }) => {
+  return {
+    tasks,
+    columns,
+  };
+};
+
+export default connect(mapStateToProps)(Column);

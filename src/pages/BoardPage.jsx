@@ -1,14 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ColumnsList } from "../components/ColumnsList";
+import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 
-const BoardPage = ({ board, columns, tasks }) => {
-  const dragend = (...props) => {
-    console.log("dragend", props);
+import { ColumnsList } from "../components/ColumnsList";
+
+const BoardPage = ({ boardId, boards }) => {
+  const board = boards[boardId];
+
+  const dragend = (res) => {
+    console.log("dragend", res);
+    const { destination, source, draggableId } = res;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    console.log(`@todo: reorder columns and tasks in columns.
+    Move task with id ${draggableId}:
+    Source: column [${source.droppableId}], index [${source.index}].
+    Destination: column [${destination.droppableId}], index [${destination.index}]`);
   };
 
-  // @todo: get board from router
   return (
     <div className="board-page">
       <header className="z-depth-1 mb-3 pt-2 pb-1">
@@ -26,11 +46,17 @@ const BoardPage = ({ board, columns, tasks }) => {
 
       <main>
         <DragDropContext onDragEnd={dragend}>
-          <ColumnsList board={board} columns={columns} tasks={tasks} />
+          <ColumnsList board={board} />
         </DragDropContext>
       </main>
     </div>
   );
 };
 
-export default BoardPage;
+const mapStateToProps = ({ boards }) => {
+  return {
+    boards,
+  };
+};
+
+export default connect(mapStateToProps)(BoardPage);

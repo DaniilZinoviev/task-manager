@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import "./BoardsList.scss";
 import { Board } from "../Board";
@@ -6,11 +7,11 @@ import { Board } from "../Board";
 const BoardsList = ({ boardsOrder, boards }) => {
   return (
     <div className="boards-list d-flex flex-wrap">
-      {boardsOrder.map((boardId, index) => {
+      {boardsOrder.map((boardId) => {
         const board = boards[boardId];
         return (
-          <div className="mx-2 mb-2">
-            <Board board={board} key={board.id} />
+          <div className="mx-2 mb-2" key={board.id}>
+            <Board board={board} />
           </div>
         );
       })}
@@ -18,4 +19,11 @@ const BoardsList = ({ boardsOrder, boards }) => {
   );
 };
 
-export default BoardsList;
+const mapStateToProps = ({ boardsOrder, boards }) => {
+  return {
+    boardsOrder,
+    boards,
+  };
+};
+
+export default connect(mapStateToProps)(BoardsList);

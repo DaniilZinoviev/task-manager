@@ -3,15 +3,12 @@ import React from "react";
 import "./ColumnsList.scss";
 import { Column } from "../Column";
 
-const ColumnsList = ({ board, columns, tasks }) => {
+const ColumnsList = ({ board }) => {
   return (
     <div className="columns-list d-flex">
-      {board.columnIds.map((columnId, index) => {
-        const column = columns[columnId];
-        return (
-          <Column key={column.id} column={column} tasks={tasks} index={index} />
-        );
-      })}
+      {board.columnIds.map((columnId, index) => (
+        <Column key={columnId} columnId={columnId} index={index} />
+      ))}
     </div>
   );
 };
