@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
 
 import { ColumnsList } from "../components/ColumnsList";
+import * as actions from "../store/actions";
 
-const BoardPage = ({ boardId, boards }) => {
+const BoardPage = ({ boardId, boards, moveTask }) => {
   const board = boards[boardId];
+  console.log("BoardPage updates");
 
   const dragend = (res) => {
-    console.log("dragend", res);
     const { destination, source, draggableId } = res;
 
     if (!destination) {
@@ -23,10 +24,17 @@ const BoardPage = ({ boardId, boards }) => {
       return;
     }
 
-    console.log(`@todo: reorder columns and tasks in columns.
-    Move task with id ${draggableId}:
-    Source: column [${source.droppableId}], index [${source.index}].
-    Destination: column [${destination.droppableId}], index [${destination.index}]`);
+    moveTask({
+      taskId: draggableId,
+      from: {
+        columnId: source.droppableId,
+        index: source.index,
+      },
+      to: {
+        columnId: destination.droppableId,
+        index: destination.index,
+      },
+    });
   };
 
   return (
@@ -59,4 +67,4 @@ const mapStateToProps = ({ boards }) => {
   };
 };
 
-export default connect(mapStateToProps)(BoardPage);
+export default connect(mapStateToProps, actions)(BoardPage);

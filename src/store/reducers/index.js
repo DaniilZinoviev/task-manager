@@ -44,12 +44,33 @@ const initialState = {
   boardsOrder: ["board-1", "board-2"],
 };
 
+const moveTask = (columns, taskId, from, to) => {
+  const newColumns = { ...columns };
+
+  const fromColumn = newColumns[from.columnId];
+  fromColumn.taskIds.splice(from.index, 1);
+
+  const toColumn = newColumns[to.columnId];
+  toColumn.taskIds.splice(to.index, 0, taskId);
+
+  return {
+    ...newColumns,
+  };
+};
+
 const reducer = (state, action) => {
   if (!state) {
     return initialState;
   }
 
   switch (action.type) {
+    case "MOVE_TASK":
+      const { taskId, from, to } = action.payload;
+      return {
+        ...state,
+        columns: moveTask(state.columns, taskId, from, to),
+      };
+
     default:
       return state;
   }
