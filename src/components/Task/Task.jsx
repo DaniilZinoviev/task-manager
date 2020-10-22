@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
+import classnames from "classnames";
 
 import "./Task.scss";
 
@@ -9,9 +10,11 @@ const Task = ({ item, index }) => {
 
   return (
     <Draggable draggableId={id} index={index}>
-      {(provided) => (
+      {(provided, snapshot) => (
         <div
-          className="task card px-2 py-1 mb-2"
+          className={classnames("task card p-2 mb-2", {
+            "is-dragging": snapshot.isDragging,
+          })}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}

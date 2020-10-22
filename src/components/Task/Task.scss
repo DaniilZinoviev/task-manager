@@ -1,0 +1,8 @@
+.task {
+  &:hover {
+  }
+  &.is-dragging {
+    background-color: aliceblue;
+    // color: white;
+  }
+}
