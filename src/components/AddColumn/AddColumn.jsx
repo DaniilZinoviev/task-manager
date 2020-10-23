@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
-import "./AddColumn.scss";
 import { addColumn } from "../../store/actions";
 
 const AddColumn = ({ addColumn, boardId }) => {
   const [label, setLabel] = useState("");
-  const [isEdit, setIsEdit] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
 
   /**
    * Handle click outside of the form
@@ -51,7 +50,7 @@ const AddColumn = ({ addColumn, boardId }) => {
   if (!isEdit) {
     return (
       <button
-        className="btn btn-add px-3 py-2 mt-0 align-self-start text-primary"
+        className="btn px-3 py-2 mt-0 align-self-start text-primary"
         onClick={() => setIsEdit(true)}
       >
         <i className="fas fa-plus"></i>
@@ -61,26 +60,23 @@ const AddColumn = ({ addColumn, boardId }) => {
   return (
     <form ref={formRef} className="column card mx-3 d-block" onSubmit={onSubmit}>
       <div className="card-body">
-        <h4 className="card-title mb-4">
-          <input
-            type="text"
-            value={label}
-            onChange={(e) => setLabel(e.target.value)}
-            placeholder="Label"
-            autoFocus={true}
-            required={true}
-            className="form-control text-dark"
-            // onBlur={() => setIsEdit(false)}
-          />
-        </h4>
+        <input
+          type="text"
+          value={label}
+          onChange={(e) => setLabel(e.target.value)}
+          placeholder="Label"
+          autoFocus={true}
+          required={true}
+          className="form-control text-dark mb-3"
+        />
         <button
-          className="btn btn-add px-3 py-2 mt-0 align-self-start text-success"
+          className="btn px-3 py-2 mt-0 text-success"
           onClick={success}
         >
           <i className="fas fa-check"></i>
         </button>
         <button
-          className="btn btn-add px-3 py-2 mt-0 align-self-start text-danger"
+          className="btn px-3 py-2 mt-0 text-danger"
           onClick={clear}
         >
           <i className="fas fa-times"></i>

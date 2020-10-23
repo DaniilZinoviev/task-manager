@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 import "./Column.scss";
 import { Task } from "../Task";
+import { AddTask } from "../AddTask";
 
 const Column = ({ columnId, tasks, columns }) => {
   const column = columns[columnId];
@@ -29,9 +30,8 @@ const Column = ({ columnId, tasks, columns }) => {
                 })}
                 {provided.placeholder}
               </div>
-              <button className="btn text-primary px-3 py-2 ml-0 mt-0">
-                <i className="fas fa-plus"></i>
-              </button>
+
+              <AddTask columnId={columnId} />
             </div>
           )}
         </Droppable>

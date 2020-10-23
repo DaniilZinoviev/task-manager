@@ -12,4 +12,11 @@ const addColumn = (payload) => {
   };
 };
 
-export { moveTask, addColumn };
+const addTask = (payload) => {
+  return {
+    type: "ADD_TASK",
+    payload,
+  };
+};
+
+export { moveTask, addColumn, addTask };
