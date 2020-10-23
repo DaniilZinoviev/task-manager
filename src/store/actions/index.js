@@ -5,4 +5,11 @@ const moveTask = (payload) => {
   };
 };
 
-export { moveTask };
+const addColumn = (payload) => {
+  return {
+    type: "ADD_COLUMN",
+    payload,
+  };
+};
+
+export { moveTask, addColumn };

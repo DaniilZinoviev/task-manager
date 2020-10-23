@@ -22,11 +22,16 @@ const Column = ({ columnId, tasks, columns }) => {
               {...provided.droppableProps}
               ref={provided.innerRef}
             >
-              {taskIds.map((taskId, index) => {
-                const task = tasks[taskId];
-                return <Task key={taskId} item={task} index={index} />;
-              })}
-              {provided.placeholder}
+              <div className="mb-3">
+                {taskIds.map((taskId, index) => {
+                  const task = tasks[taskId];
+                  return <Task key={taskId} item={task} index={index} />;
+                })}
+                {provided.placeholder}
+              </div>
+              <button className="btn text-primary px-3 py-2 ml-0 mt-0">
+                <i className="fas fa-plus"></i>
+              </button>
             </div>
           )}
         </Droppable>

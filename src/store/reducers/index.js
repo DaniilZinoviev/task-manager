@@ -71,6 +71,20 @@ const reducer = (state, action) => {
         columns: moveTask(state.columns, taskId, from, to),
       };
 
+    case "ADD_COLUMN":
+      const { column, boardId } = action.payload;
+      return {
+        ...state,
+        columns: { ...state.columns, [column.id]: column },
+        boards: {
+          ...state.boards,
+          [boardId]: {
+            ...state.boards[boardId],
+            columnIds: [...state.boards[boardId].columnIds, column.id],
+          },
+        },
+      };
+
     default:
       return state;
   }
