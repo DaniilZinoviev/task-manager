@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import Popover from 'react-awesome-popover'
 
-import styles from "./Edit.scss";
+import styles from "./Actions.scss";
 
-const Edit = ({ onDelete, onEdit }) => {
+const Actions = ({ onDelete, onEdit }) => {
 
   return (
     <Fragment>
@@ -38,10 +38,10 @@ const Edit = ({ onDelete, onEdit }) => {
 };
 
 
-Edit.propTypes = {
+Actions.propTypes = {
   onDelete: PropTypes.func.isRequired,
   onEdit: PropTypes.func.isRequired
 };
 
 
-export default Edit;
+export default Actions;

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { Task } from "../Task";
 import { AddTask } from "../AddTask";
-import { Edit } from '../Edit'
+import { Actions } from '../Actions'
 import { deleteColumn } from "../../store/actions";
 import "./Column.scss";
 
@@ -31,7 +31,7 @@ const Column = ({ columnId, tasks, columns, deleteColumn }) => {
           </h4>
 
           <div className="edit">
-            <Edit onDelete={handleDelete} onEdit={handleEdit} />
+            <Actions onDelete={handleDelete} onEdit={handleEdit} />
           </div>
         </div>
 

@@ -5,7 +5,7 @@ import classnames from "classnames";
 import { connect } from "react-redux";
 
 import "./Task.scss";
-import { Edit } from "../Edit";
+import { Actions } from "../Actions";
 import { deleteTask } from "../../store/actions";
 
 const Task = ({ item, index, deleteTask }) => {
@@ -35,7 +35,7 @@ const Task = ({ item, index, deleteTask }) => {
             <span className="mr-2">{title}</span>
 
             <div className="edit">
-              <Edit onDelete={handleDelete} onEdit={handleEdit}/>
+              <Actions onDelete={handleDelete} onEdit={handleEdit}/>
             </div>
           </div>
         </div>

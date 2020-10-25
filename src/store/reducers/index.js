@@ -58,6 +58,17 @@ const deleteTask = (state, payload) => {
 };
 
 
+const editColumn = (state, payload) => {
+  const { column, columnId } = payload;
+  return {
+    ...state,
+    columns: {
+      ...state.columns,
+      [columnId]: column
+    }
+  };
+};
+
 const reducer = (state, action) => {
   if (!state) {
     return initialState;
@@ -94,7 +105,6 @@ const reducer = (state, action) => {
       };
 
     case "DELETE_TASK":
-      console.log('DELETE_TASK', deleteTask(state, action.payload))
       return deleteTask(state, action.payload);
 
     case "DELETE_COLUMN":
