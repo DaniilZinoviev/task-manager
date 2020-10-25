@@ -5,6 +5,13 @@ const moveTask = (payload) => {
   };
 };
 
+const addTask = (payload) => {
+  return {
+    type: "ADD_TASK",
+    payload,
+  };
+};
+
 const addColumn = (payload) => {
   return {
     type: "ADD_COLUMN",
@@ -12,9 +19,9 @@ const addColumn = (payload) => {
   };
 };
 
-const addTask = (payload) => {
+const addBoard = (payload) => {
   return {
-    type: "ADD_TASK",
+    type: "ADD_BOARD",
     payload,
   };
 };
@@ -33,6 +40,13 @@ const deleteColumn = (payload) => {
   };
 };
 
+const deleteBoard = (payload) => {
+  return {
+    type: "DELETE_BOARD",
+    payload,
+  };
+};
+
 const updateTask = (payload) => {
   return {
     type: "UPDATE_TASK",
@@ -47,12 +61,22 @@ const updateColumn = (payload) => {
   };
 };
 
+const updateBoard = (payload) => {
+  return {
+    type: "UPDATE_BOARD",
+    payload,
+  };
+};
+
 export {
   moveTask,
-  addColumn,
   addTask,
+  addColumn,
+  addBoard,
   deleteTask,
   deleteColumn,
+  deleteBoard,
   updateTask,
   updateColumn,
+  updateBoard,
 };

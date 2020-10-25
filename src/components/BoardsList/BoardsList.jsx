@@ -3,18 +3,23 @@ import { connect } from "react-redux";
 
 import "./BoardsList.scss";
 import { Board } from "../Board";
+import { AddBoard } from "../AddBoard";
 
 const BoardsList = ({ boardsOrder, boards }) => {
   return (
-    <div className="boards-list d-flex flex-wrap">
+    <div className="d-flex flex-wrap">
       {boardsOrder.map((boardId) => {
         const board = boards[boardId];
         return (
-          <div className="mx-2 mb-2" key={board.id}>
+          <div className="mx-2 mb-2 boardWrap" key={board.id}>
             <Board board={board} />
           </div>
         );
       })}
+
+      <div className="mx-2 mb-2 boardWrap">
+        <AddBoard />
+      </div>
     </div>
   );
 };

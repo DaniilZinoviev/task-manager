@@ -17,6 +17,66 @@ const moveTask = (columns, payload) => {
   };
 };
 
+const addTask = (state, payload) => {
+  const { task, columnId } = payload;
+  return {
+    ...state,
+    tasks: { ...state.tasks, [task.id]: task },
+    columns: {
+      ...state.columns,
+      [columnId]: {
+        ...state.columns[columnId],
+        taskIds: [...state.columns[columnId].taskIds, task.id],
+      },
+    },
+  };
+}
+
+const addColumn = (state, payload) => {
+  const { column, boardId } = payload;
+  return {
+    ...state,
+    columns: { ...state.columns, [column.id]: column },
+    boards: {
+      ...state.boards,
+      [boardId]: {
+        ...state.boards[boardId],
+        columnIds: [...state.boards[boardId].columnIds, column.id],
+      },
+    },
+  };
+}
+
+const addBoard = (state, payload) => {
+  const { board } = payload;
+  return {
+    ...state,
+    boards: {
+      ...state.boards,
+      [board.id]: board,
+    },
+    boardsOrder: [...state.boardsOrder, board.id]
+  };
+}
+
+const deleteTask = (state, payload) => {
+  const { taskId } = payload;
+  const newTasks = { ...state.tasks };
+  const newColumns = { ...state.columns };
+
+  delete newTasks[taskId];
+  for (const columnId in newColumns) {
+    const taskIds = newColumns[columnId].taskIds;
+    newColumns[columnId].taskIds = taskIds.filter((id) => id !== taskId);
+  }
+
+  return {
+    ...state,
+    tasks: newTasks,
+    columns: newColumns,
+  };
+};
+
 const deleteColumn = (state, payload) => {
   const { columnId } = payload;
   const newBoards = { ...state.boards };
@@ -39,21 +99,14 @@ const deleteColumn = (state, payload) => {
   };
 };
 
-const deleteTask = (state, payload) => {
-  const { taskId } = payload;
-  const newTasks = { ...state.tasks };
-  const newColumns = { ...state.columns };
-
-  delete newTasks[taskId];
-  for (const columnId in newColumns) {
-    const taskIds = newColumns[columnId].taskIds;
-    newColumns[columnId].taskIds = taskIds.filter((id) => id !== taskId);
-  }
-
+const deleteBoard = (state, payload) => {
+  const { boardId } = payload;
+  const newBoards = { ...state.boards };
+  delete newBoards[boardId];
   return {
     ...state,
-    tasks: newTasks,
-    columns: newColumns,
+    boards: newBoards,
+    boardsOrder: state.boardsOrder.filter(id => id !== boardId)
   };
 };
 
@@ -73,6 +126,14 @@ const updateColumn = (state, payload) => {
   };
 };
 
+const updateBoard = (state, payload) => {
+  const { board } = payload;
+  return {
+    ...state,
+    boards: { ...state.boards, [board.id]: board },
+  };
+};
+
 const reducer = (state, action) => {
   if (!state) {
     return initialState;
@@ -80,32 +141,13 @@ const reducer = (state, action) => {
 
   switch (action.type) {
     case "ADD_TASK":
-      const { task, columnId } = action.payload;
-      return {
-        ...state,
-        tasks: { ...state.tasks, [task.id]: task },
-        columns: {
-          ...state.columns,
-          [columnId]: {
-            ...state.columns[columnId],
-            taskIds: [...state.columns[columnId].taskIds, task.id],
-          },
-        },
-      };
+      return addTask(state, action.payload);
 
     case "ADD_COLUMN":
-      const { column, boardId } = action.payload;
-      return {
-        ...state,
-        columns: { ...state.columns, [column.id]: column },
-        boards: {
-          ...state.boards,
-          [boardId]: {
-            ...state.boards[boardId],
-            columnIds: [...state.boards[boardId].columnIds, column.id],
-          },
-        },
-      };
+      return addColumn(state, action.payload);
+
+    case "ADD_BOARD":
+      return addBoard(state, action.payload);
 
     case "DELETE_TASK":
       return deleteTask(state, action.payload);
@@ -113,11 +155,17 @@ const reducer = (state, action) => {
     case "DELETE_COLUMN":
       return deleteColumn(state, action.payload);
 
+    case "DELETE_BOARD":
+      return deleteBoard(state, action.payload);
+
     case "UPDATE_TASK":
       return updateTask(state, action.payload);
 
     case "UPDATE_COLUMN":
       return updateColumn(state, action.payload);
+
+    case "UPDATE_BOARD":
+      return updateBoard(state, action.payload);
 
     case "MOVE_TASK":
       return {
