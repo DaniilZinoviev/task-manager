@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Draggable } from "react-beautiful-dnd";
 import classnames from "classnames";
@@ -6,25 +6,47 @@ import { connect } from "react-redux";
 
 import "./Task.scss";
 import { Actions } from "../Actions";
-import { deleteTask } from "../../store/actions";
+import { deleteTask, updateTask } from "../../store/actions";
+import { EditForm } from "../EditForm";
+import { useOutsideFilterRef } from "../../hooks";
 
-const Task = ({ item, index, deleteTask }) => {
+const Task = ({ item, index, deleteTask, updateTask }) => {
   const { id, title } = item;
+  const [isEdit, setIsEdit] = useState(false);
 
-  const handleEdit = () => {
-    console.log(`handleEdit()`)
-  }
+  const handleEditSuccess = ({ input }) => {
+    const newTask = { ...item, title: input };
+    updateTask({ task: newTask });
+    setIsEdit(false);
+  };
+
+  const handleEditCancel = () => {
+    setIsEdit(false);
+  };
+
+  const [formWrapperRef] = useOutsideFilterRef(
+    handleEditCancel,
+    () => !!isEdit,
+    [isEdit]
+  );
 
   const handleDelete = () => {
-    console.log(`handleDelete() id=[${id}]`)
-    deleteTask({taskId: id})
+    deleteTask({ taskId: id });
+  };
+
+  if (isEdit) {
+    return (
+      <div ref={formWrapperRef} className="task card p-2 mb-2">
+        <EditForm onSuccess={handleEditSuccess} onCancel={handleEditCancel} />
+      </div>
+    );
   }
 
   return (
     <Draggable draggableId={id} index={index}>
       {(provided, snapshot) => (
         <div
-          className={classnames("task card p-2 mb-2 ", {
+          className={classnames("task card p-2 mb-2", {
             "is-dragging": snapshot.isDragging,
           })}
           {...provided.draggableProps}
@@ -35,7 +57,7 @@ const Task = ({ item, index, deleteTask }) => {
             <span className="mr-2">{title}</span>
 
             <div className="edit">
-              <Actions onDelete={handleDelete} onEdit={handleEdit}/>
+              <Actions onDelete={handleDelete} onEdit={() => setIsEdit(true)} />
             </div>
           </div>
         </div>
@@ -49,4 +71,4 @@ Task.propTypes = {
   index: PropTypes.number,
 };
 
-export default connect(null, { deleteTask })(Task);
+export default connect(null, { deleteTask, updateTask })(Task);

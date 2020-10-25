@@ -13,7 +13,6 @@ const store = createStore(reducer, storage.getData());
 store.subscribe(() => {
   const newState = store.getState();
   storage.saveData(newState);
-  console.log(`new state is `, newState)
 })
 
 ReactDOM.render(

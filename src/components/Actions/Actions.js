@@ -18,12 +18,12 @@ const Actions = ({ onDelete, onEdit }) => {
         <i className={classNames(styles.edit, "fas fa-ellipsis-v p-2")}></i>
         <div className="card">
           <div className="list-group">
-            {/* <button
+            <button
               className="list-group-item list-group-item-action py-2 px-3"
               onClick={() => onEdit()}
             >
               Edit
-            </button> */}
+            </button>
             <button
               className="list-group-item list-group-item-action py-2 px-3"
               onClick={() => onDelete()}

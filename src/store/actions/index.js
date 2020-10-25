@@ -33,4 +33,26 @@ const deleteColumn = (payload) => {
   };
 };
 
-export { moveTask, addColumn, addTask, deleteTask, deleteColumn };
+const updateTask = (payload) => {
+  return {
+    type: "UPDATE_TASK",
+    payload,
+  };
+};
+
+const updateColumn = (payload) => {
+  return {
+    type: "UPDATE_COLUMN",
+    payload,
+  };
+};
+
+export {
+  moveTask,
+  addColumn,
+  addTask,
+  deleteTask,
+  deleteColumn,
+  updateTask,
+  updateColumn,
+};

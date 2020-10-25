@@ -8,7 +8,6 @@ import * as actions from "../store/actions";
 
 const BoardPage = ({ boardId, boards, moveTask }) => {
   const board = boards[boardId];
-  console.log("BoardPage updates");
 
   const dragend = (res) => {
     const { destination, source, draggableId } = res;

@@ -21,27 +21,27 @@ const deleteColumn = (state, payload) => {
   const { columnId } = payload;
   const newBoards = { ...state.boards };
   const newColumns = { ...state.columns };
-  const newTasks = {...state.tasks};
+  const newTasks = { ...state.tasks };
 
   for (const boardId in newBoards) {
     const columnIds = newBoards[boardId].columnIds;
     newBoards[boardId].columnIds = columnIds.filter((id) => id !== columnId);
   }
 
-  newColumns[columnId].taskIds.forEach(task => delete newTasks[task]);
+  newColumns[columnId].taskIds.forEach((task) => delete newTasks[task]);
   delete newColumns[columnId];
 
   return {
     ...state,
     boards: newBoards,
     columns: newColumns,
-    tasks: newTasks
+    tasks: newTasks,
   };
 };
 
 const deleteTask = (state, payload) => {
   const { taskId } = payload;
-  const newTasks = {...state.tasks};
+  const newTasks = { ...state.tasks };
   const newColumns = { ...state.columns };
 
   delete newTasks[taskId];
@@ -53,19 +53,23 @@ const deleteTask = (state, payload) => {
   return {
     ...state,
     tasks: newTasks,
-    columns: newColumns
+    columns: newColumns,
   };
 };
 
-
-const editColumn = (state, payload) => {
-  const { column, columnId } = payload;
+const updateTask = (state, payload) => {
+  const { task } = payload;
   return {
     ...state,
-    columns: {
-      ...state.columns,
-      [columnId]: column
-    }
+    tasks: { ...state.tasks, [task.id]: task },
+  };
+};
+
+const updateColumn = (state, payload) => {
+  const { column } = payload;
+  return {
+    ...state,
+    columns: { ...state.columns, [column.id]: column },
   };
 };
 
@@ -75,7 +79,6 @@ const reducer = (state, action) => {
   }
 
   switch (action.type) {
-
     case "ADD_TASK":
       const { task, columnId } = action.payload;
       return {
@@ -109,6 +112,12 @@ const reducer = (state, action) => {
 
     case "DELETE_COLUMN":
       return deleteColumn(state, action.payload);
+
+    case "UPDATE_TASK":
+      return updateTask(state, action.payload);
+
+    case "UPDATE_COLUMN":
+      return updateColumn(state, action.payload);
 
     case "MOVE_TASK":
       return {
