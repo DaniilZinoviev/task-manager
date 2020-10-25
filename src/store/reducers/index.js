@@ -3,7 +3,7 @@ import { appData } from "../../mock/test-data";
 const initialState = appData;
 
 const moveTask = (columns, payload) => {
-  const { taskId, from, to } = payload
+  const { taskId, from, to } = payload;
   const newColumns = { ...columns };
 
   const fromColumn = newColumns[from.columnId];
@@ -17,16 +17,66 @@ const moveTask = (columns, payload) => {
   };
 };
 
+const deleteColumn = (state, payload) => {
+  const { columnId } = payload;
+  const newBoards = { ...state.boards };
+  const newColumns = { ...state.columns };
+  const newTasks = {...state.tasks};
+
+  for (const boardId in newBoards) {
+    const columnIds = newBoards[boardId].columnIds;
+    newBoards[boardId].columnIds = columnIds.filter((id) => id !== columnId);
+  }
+
+  newColumns[columnId].taskIds.forEach(task => delete newTasks[task]);
+  delete newColumns[columnId];
+
+  return {
+    ...state,
+    boards: newBoards,
+    columns: newColumns,
+    tasks: newTasks
+  };
+};
+
+const deleteTask = (state, payload) => {
+  const { taskId } = payload;
+  const newTasks = {...state.tasks};
+  const newColumns = { ...state.columns };
+
+  delete newTasks[taskId];
+  for (const columnId in newColumns) {
+    const taskIds = newColumns[columnId].taskIds;
+    newColumns[columnId].taskIds = taskIds.filter((id) => id !== taskId);
+  }
+
+  return {
+    ...state,
+    tasks: newTasks,
+    columns: newColumns
+  };
+};
+
+
 const reducer = (state, action) => {
   if (!state) {
     return initialState;
   }
-  
+
   switch (action.type) {
-    case "MOVE_TASK":
+
+    case "ADD_TASK":
+      const { task, columnId } = action.payload;
       return {
         ...state,
-        columns: moveTask(state.columns, action.payload),
+        tasks: { ...state.tasks, [task.id]: task },
+        columns: {
+          ...state.columns,
+          [columnId]: {
+            ...state.columns[columnId],
+            taskIds: [...state.columns[columnId].taskIds, task.id],
+          },
+        },
       };
 
     case "ADD_COLUMN":
@@ -43,18 +93,17 @@ const reducer = (state, action) => {
         },
       };
 
-    case "ADD_TASK":
-      const { task, columnId } = action.payload;
+    case "DELETE_TASK":
+      console.log('DELETE_TASK', deleteTask(state, action.payload))
+      return deleteTask(state, action.payload);
+
+    case "DELETE_COLUMN":
+      return deleteColumn(state, action.payload);
+
+    case "MOVE_TASK":
       return {
         ...state,
-        tasks: { ...state.tasks, [task.id]: task },
-        columns: {
-          ...state.columns,
-          [columnId]: {
-            ...state.columns[columnId],
-            taskIds: [...state.columns[columnId].taskIds, task.id],
-          },
-        },
+        columns: moveTask(state.columns, action.payload),
       };
 
     default:

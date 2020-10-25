@@ -3,18 +3,37 @@ import PropTypes from "prop-types";
 import { Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import "./Column.scss";
 import { Task } from "../Task";
 import { AddTask } from "../AddTask";
+import { Edit } from '../Edit'
+import { deleteColumn } from "../../store/actions";
+import "./Column.scss";
 
-const Column = ({ columnId, tasks, columns }) => {
+const Column = ({ columnId, tasks, columns, deleteColumn }) => {
   const column = columns[columnId];
   const { id, title, taskIds } = column;
+
+  const handleDelete = () => {
+    console.log(`[${Column.name}] handleDelete() (columnId=[${columnId}])`)
+    deleteColumn({columnId})
+  }
+
+  const handleEdit = () => {
+    console.log(`[${Column.name}] handleEdit()`)
+  }
 
   return (
     <div className="column card mx-3">
       <div className="card-body">
-        <h4 className="card-title mb-4">{title}</h4>
+        <div className="mb-4 d-flex justify-content-between">
+          <h4 className="card-title mb-0 mr-2">
+            {title}
+          </h4>
+
+          <div className="edit">
+            <Edit onDelete={handleDelete} onEdit={handleEdit} />
+          </div>
+        </div>
 
         <Droppable droppableId={id}>
           {(provided) => (
@@ -52,4 +71,4 @@ const mapStateToProps = ({ tasks, columns }) => {
   };
 };
 
-export default connect(mapStateToProps)(Column);
+export default connect(mapStateToProps, { deleteColumn })(Column);

@@ -19,4 +19,18 @@ const addTask = (payload) => {
   };
 };
 
-export { moveTask, addColumn, addTask };
+const deleteTask = (payload) => {
+  return {
+    type: "DELETE_TASK",
+    payload,
+  };
+};
+
+const deleteColumn = (payload) => {
+  return {
+    type: "DELETE_COLUMN",
+    payload,
+  };
+};
+
+export { moveTask, addColumn, addTask, deleteTask, deleteColumn };
