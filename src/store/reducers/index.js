@@ -1,8 +1,9 @@
-import { appData } from '../../sample-data'
+import { appData } from "../../mock/test-data";
 
-const initialState = appData
+const initialState = appData;
 
-const moveTask = (columns, taskId, from, to) => {
+const moveTask = (columns, payload) => {
+  const { taskId, from, to } = payload
   const newColumns = { ...columns };
 
   const fromColumn = newColumns[from.columnId];
@@ -20,16 +21,16 @@ const reducer = (state, action) => {
   if (!state) {
     return initialState;
   }
-  const { task, column, boardId, columnId, taskId, from, to } = action.payload;
-
+  
   switch (action.type) {
     case "MOVE_TASK":
       return {
         ...state,
-        columns: moveTask(state.columns, taskId, from, to),
+        columns: moveTask(state.columns, action.payload),
       };
 
     case "ADD_COLUMN":
+      const { column, boardId } = action.payload;
       return {
         ...state,
         columns: { ...state.columns, [column.id]: column },
@@ -43,6 +44,7 @@ const reducer = (state, action) => {
       };
 
     case "ADD_TASK":
+      const { task, columnId } = action.payload;
       return {
         ...state,
         tasks: { ...state.tasks, [task.id]: task },

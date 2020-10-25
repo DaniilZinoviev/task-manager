@@ -33,13 +33,19 @@ export const appData = {
     "board-1": {
       id: "board-1",
       title: "First board",
-      columnIds: ["column-1", "column-2"],
+      columnIds: [
+        "column-1", "column-2"
+      ],
     },
     "board-2": {
       id: "board-2",
       title: "Second board",
-      columnIds: ["column-2", "column-1"],
+      columnIds: [
+        "column-2", "column-1"
+      ],
     },
   },
-  boardsOrder: ["board-1", "board-2"],
+  boardsOrder: [
+    "board-1", "board-2"
+  ],
 };
