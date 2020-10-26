@@ -18,7 +18,7 @@
 }
 .column-wrap {
   @include bp($small) {
-    // flex-basis: 280px;
+    flex-basis: 280px;
     min-width: 280px;
   }
 }
