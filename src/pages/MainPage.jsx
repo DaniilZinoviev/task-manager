@@ -11,7 +11,7 @@ const MainPage = () => {
         </div>
       </header>
 
-      <main className="container">
+      <main className="container pb-3">
         <BoardsList />
       </main>
     </div>

@@ -6,15 +6,16 @@ import AddColumn from "../AddColumn/AddColumn";
 
 const ColumnsList = ({ board }) => {
   return (
-    <div className="columns-list d-flex">
+    <div className="columns-list d-flex flex-wrap">
       {board.columnIds.map((columnId, index) => (
-        <Column key={columnId} columnId={columnId} index={index} />
+        <div className="mx-sm-2 mb-2 column-wrap" key={columnId}>
+          <Column columnId={columnId} index={index} />
+        </div>
       ))}
 
-      {/* <button className="btn btn-add px-3 py-2 mt-0 align-self-start text-primary">
-        <i className="fas fa-plus"></i>
-      </button> */}
-      <AddColumn boardId={board.id}/>
+      <div className="mx-sm-2 mb-2 column-wrap">
+        <AddColumn boardId={board.id} />
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { DragDropContext } from "react-beautiful-dnd";
+import classNames from "classnames";
 
 import { ColumnsList } from "../components/ColumnsList";
 import * as actions from "../store/actions";
@@ -51,7 +52,7 @@ const BoardPage = ({ boardId, boards, moveTask }) => {
         <h2>{board.title}</h2>
       </div>
 
-      <main>
+      <main className="container pb-3">
         <DragDropContext onDragEnd={dragend}>
           <ColumnsList board={board} />
         </DragDropContext>

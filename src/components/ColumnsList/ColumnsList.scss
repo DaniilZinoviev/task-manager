@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+@import "../../styles/mixins";
+
+.columns-list {
+  @include bp-max($small) {
+    flex-direction: column;
+    // align-items: stretch;
+  }
+}
+.column-wrap {
+  @include bp($small) {
+    flex-basis: 280px;
+  }
+}

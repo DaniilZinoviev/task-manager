@@ -30,7 +30,7 @@ const AddBoard = ({ addBoard }) => {
   if (!isEdit) {
     return (
       <button
-        className="btn px-3 py-2 mt-0 align-self-start text-primary"
+        className="btn px-3 py-2 mt-0 mx-0 align-self-start text-primary"
         onClick={() => setIsEdit(true)}
       >
         <i className="fas fa-plus"></i>
@@ -38,7 +38,7 @@ const AddBoard = ({ addBoard }) => {
     )
   }
   return (
-    <div ref={formWrapperRef} className="card mx-3">
+    <div ref={formWrapperRef} className="card">
       <div className="card-body">
         <EditForm onSuccess={handleSuccess} onCancel={handleCancel} />
       </div>

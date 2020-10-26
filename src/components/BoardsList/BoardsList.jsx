@@ -11,7 +11,7 @@ const BoardsList = ({ boardsOrder, boards }) => {
       {boardsOrder.map((boardId) => {
         const board = boards[boardId];
         return (
-          <div className="mx-2 mb-2 boardWrap" key={board.id}>
+          <div className="mx-2 mb-2 board-wrap" key={board.id}>
             <Board board={board} />
           </div>
         );

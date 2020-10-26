@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Droppable } from "react-beautiful-dnd";
 import { connect } from "react-redux";
 
-import "./Column.scss";
 import { deleteColumn, updateColumn } from "../../store/actions";
 import { useOutsideFilterRef } from "../../hooks";
 import { Task } from "../Task";
@@ -34,7 +33,7 @@ const Column = ({ columnId, tasks, columns, deleteColumn, updateColumn }) => {
 
   if (isEdit) {
     return (
-      <div ref={formWrapperRef} className="column card mx-3">
+      <div ref={formWrapperRef} className="card mx-3">
         <div className="card-body">
           <div className="mb-4">
             <EditForm onSuccess={handleEditSuccess} onCancel={handleEditCancel} />
@@ -43,7 +42,7 @@ const Column = ({ columnId, tasks, columns, deleteColumn, updateColumn }) => {
           <Droppable droppableId={id}>
             {(provided) => (
               <div
-                className="columns card-text"
+                className="card-text"
                 {...provided.droppableProps}
                 ref={provided.innerRef}
               >
@@ -65,7 +64,7 @@ const Column = ({ columnId, tasks, columns, deleteColumn, updateColumn }) => {
   }
 
   return (
-    <div className="column card mx-3">
+    <div className="card">
       <div className="card-body">
         <div className="mb-4 d-flex justify-content-between">
           <h4 className="card-title mb-0 mr-2">{title}</h4>
