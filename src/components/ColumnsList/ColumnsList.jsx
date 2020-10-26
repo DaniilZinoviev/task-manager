@@ -6,7 +6,7 @@ import AddColumn from "../AddColumn/AddColumn";
 
 const ColumnsList = ({ board }) => {
   return (
-    <div className="columns-list d-flex flex-wrap">
+    <div className="columns-list py-2 d-flex">
       {board.columnIds.map((columnId, index) => (
         <div className="mx-sm-2 mb-2 column-wrap" key={columnId}>
           <Column columnId={columnId} index={index} />

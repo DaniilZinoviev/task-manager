@@ -4,11 +4,21 @@
 .columns-list {
   @include bp-max($small) {
     flex-direction: column;
-    // align-items: stretch;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  @include bp($small) {
+    overflow: auto;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    &::-webkit-scrollbar {
+      width: 0px;
+    }
   }
 }
 .column-wrap {
   @include bp($small) {
-    flex-basis: 280px;
+    // flex-basis: 280px;
+    min-width: 280px;
   }
 }

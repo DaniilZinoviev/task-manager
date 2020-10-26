@@ -52,7 +52,7 @@ const BoardPage = ({ boardId, boards, moveTask }) => {
         <h2>{board.title}</h2>
       </div>
 
-      <main className="container pb-3">
+      <main>
         <DragDropContext onDragEnd={dragend}>
           <ColumnsList board={board} />
         </DragDropContext>
