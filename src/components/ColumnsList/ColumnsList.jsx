@@ -15,7 +15,6 @@ const ColumnsList = ({ board }) => {
   }, [])
 
   const onMouseDown = (e) => {
-    console.log(e.target, containerRef.current)
     if (
       e.target === containerRef.current ||
       e.target.parentElement === containerRef.current
