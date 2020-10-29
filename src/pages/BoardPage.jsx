@@ -48,7 +48,7 @@ const BoardPage = ({ boardId, boards, moveTask }) => {
         </div>
       </header>
 
-      <div className="container mb-5">
+      <div className="container mb-2">
         <h2>{board.title}</h2>
       </div>
 

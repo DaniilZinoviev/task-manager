@@ -2,6 +2,8 @@
 @import "../../styles/mixins";
 
 .columns-list {
+  user-select: none;
+  flex-grow: 1;
   @include bp-max($small) {
     flex-direction: column;
     padding-left: 15px;
@@ -14,11 +16,18 @@
     &::-webkit-scrollbar {
       width: 0px;
     }
+    cursor: grab;
+    &.scrolling {
+      cursor: grabbing;
+    }
   }
 }
 .column-wrap {
   @include bp($small) {
     flex-basis: 280px;
     min-width: 280px;
+  }
+  > .card {
+    cursor: auto;
   }
 }
